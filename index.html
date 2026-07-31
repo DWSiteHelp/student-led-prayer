@@ -1,0 +1,992 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Student-Led Prayer, LLC</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#0fb4c0">
+  <style>
+    :root {
+      --bg: #0fb4c0;            /* lighter teal / aqua */
+      --card: #009999;          /* slightly darker teal cards */
+      --accent: #ff7f5c;        /* coral */
+      --accent-2: #ffb396;      /* lighter coral */
+      --text: #ffffff;
+      --muted: rgba(255, 255, 255, 0.8);
+      --ring: rgba(255, 255, 255, 0.35);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html, body {
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      -webkit-font-smoothing: antialiased;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    img {
+      max-width: 100%;
+      display: block;
+    }
+
+    .container {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 0 1.5rem;
+    }
+
+  header {
+  position: sticky;
+  top: 0;
+  z-index: 40;
+  background: #fff7ec;              /* ivory band behind the nav */
+  border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+}
+
+    header .inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0.75rem 1.5rem;
+    }
+
+    .brand {
+      font-weight: 700;
+      letter-spacing: 0.03em;
+      text-transform: uppercase;
+      font-size: 0.9rem;
+      color: var(--accent);
+    }
+
+    header nav {
+      display: flex;
+      gap: 1.75rem;
+      font-size: 0.9rem;
+    }
+
+    header nav a {
+      color: var(--accent);
+      font-weight: 500;
+      position: relative;
+    }
+
+    header nav a::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      bottom: -0.2rem;
+      width: 0;
+      height: 2px;
+      background: var(--accent-2);
+      transition: width 0.18s ease-out;
+    }
+
+    header nav a:hover::after,
+    header nav a:focus-visible::after {
+      width: 100%;
+    }
+
+    main {
+      padding-bottom: 4rem;
+    }
+
+    .section {
+      padding: 4rem 0;
+    }
+
+    .section h2 {
+      font-size: 2rem;
+      margin: 0 0 1rem;
+    }
+
+    .lead {
+      max-width: 46rem;
+      color: var(--muted);
+      font-size: 0.98rem;
+    }
+
+    .hero {
+      padding-top: 3rem;
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 2.1fr) minmax(0, 1.6fr);
+      gap: 2.5rem;
+      align-items: flex-start;
+    }
+
+    .pill {
+      display: inline-flex;
+      align-items: center;
+      padding: 0.2rem 0.7rem;
+      border-radius: 999px;
+      background: rgba(0, 0, 0, 0.12);
+      font-size: 0.75rem;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      margin-bottom: 1rem;
+      color: var(--muted);
+    }
+
+    .hero h1 {
+      font-size: clamp(2.2rem, 3vw + 1.2rem, 3rem);
+      line-height: 1.15;
+      margin: 0 0 1rem;
+    }
+
+    .hero p {
+      color: var(--muted);
+      font-size: 1rem;
+      margin: 0 0 1.75rem;
+      max-width: 36rem;
+    }
+
+    .btn-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.8rem;
+    }
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.85rem 1.8rem;
+  border-radius: 999px;
+  border: 1px solid var(--accent);
+  background: linear-gradient(180deg, var(--accent-2), var(--accent));
+  color: #ffffff;
+  font-weight: 600;
+  font-size: 0.98rem;
+  letter-spacing: 0.02em;
+  box-shadow: 0 8px 18px rgba(0, 0, 0, 0.25);
+  cursor: pointer;
+  text-decoration: none;
+  transition: transform 0.12s ease, box-shadow 0.12s ease, filter 0.12s ease;
+  white-space: nowrap;
+}
+
+    .btn:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 14px 30px rgba(0, 0, 0, 0.3);
+      opacity: 0.96;
+    }
+
+.btn.alt {
+  /* Same shape and colors as primary so all buttons match */
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.85rem 1.8rem;
+  border-radius: 999px;
+  border: 1px solid var(--accent);
+  background: linear-gradient(180deg, var(--accent-2), var(--accent));
+  color: #ffffff;
+  font-weight: 600;
+  font-size: 0.98rem;
+  letter-spacing: 0.02em;
+  box-shadow: 0 8px 18px rgba(0, 0, 0, 0.25);
+  cursor: pointer;
+  text-decoration: none;
+  transition: transform 0.12s ease, box-shadow 0.12s ease, filter 0.12s ease;
+  white-space: nowrap;
+}
+
+.btn:hover,
+.btn.alt:hover {
+  filter: brightness(1.05);
+  transform: translateY(-1px);
+  box-shadow: 0 10px 22px rgba(0, 0, 0, 0.3);
+}
+
+    .hero-side {
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+    }
+
+    .hero-logo {
+      display: block;
+      max-width: 100%;
+      border-radius: 16px;
+      background: #fff7ec;
+      padding: 12px 14px;
+      box-shadow: 0 12px 30px rgba(0, 0, 0, 0.25);
+      margin-left: auto;
+      margin-bottom: 0.75rem;
+    }
+
+    .card {
+      background: var(--card);
+      border-radius: 16px;
+      padding: 1.6rem 1.8rem;
+      box-shadow: 0 18px 40px rgba(0, 0, 0, 0.35);
+      border: 1px solid rgba(255, 255, 255, 0.14);
+    }
+
+    .card h3 {
+      margin: 0 0 0.75rem;
+      font-size: 1.05rem;
+    }
+
+    .card p {
+      margin: 0;
+      font-size: 0.92rem;
+      line-height: 1.6;
+      color: var(--muted);
+    }
+
+    .at-a-glance {
+      font-size: 0.9rem;
+    }
+
+    .glance-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 0.75rem;
+    }
+
+    .glance-table th,
+    .glance-table td {
+      padding: 0.35rem 0;
+      vertical-align: top;
+      text-align: left;
+      font-size: 0.9rem;
+    }
+
+    .glance-table th {
+      width: 26%;
+      font-weight: 600;
+      color: var(--muted);
+    }
+
+    .glance-table td {
+      color: #ffffff;
+    }
+
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 1.5rem;
+      margin-top: 2.5rem;
+    }
+
+    .features-grid .card {
+      padding-bottom: 1.4rem;
+    }
+
+    .programs-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 1.5rem;
+      margin-top: 2rem;
+    }
+
+    .programs-grid .card p {
+      font-size: 0.9rem;
+    }
+
+    .panels-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 1.5rem;
+      margin-top: 2rem;
+    }
+
+    .info-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 0.75rem;
+      font-size: 0.9rem;
+    }
+
+    .info-table th,
+    .info-table td {
+      padding: 0.45rem 0.25rem;
+      border-top: 1px solid rgba(255, 255, 255, 0.12);
+      text-align: left;
+      vertical-align: top;
+    }
+
+    .info-table th {
+      width: 26%;
+      font-weight: 600;
+      color: var(--muted);
+    }
+
+    .info-table td {
+      color: #ffffff;
+    }
+
+    .note {
+      margin-top: 1rem;
+      font-size: 0.85rem;
+      color: var(--muted);
+    }
+
+    .faq-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 1.5rem;
+      margin-top: 2rem;
+    }
+
+    .faq-grid h3 {
+      font-size: 1rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .faq-grid p {
+      font-size: 0.9rem;
+    }
+
+
+    .event-callout {
+      margin-top: 3rem;
+    }
+
+    .event-card {
+      display: grid;
+      grid-template-columns: minmax(0, 1.4fr) minmax(220px, 0.8fr);
+      gap: 1.5rem;
+      align-items: center;
+      background: #fff7ec;
+      color: #0b6f75;
+      border-radius: 18px;
+      padding: 1.8rem;
+      box-shadow: 0 18px 40px rgba(0, 0, 0, 0.28);
+      border: 1px solid rgba(255, 127, 92, 0.25);
+    }
+
+    .event-card h2,
+    .event-card h3,
+    .event-card p,
+    .event-card li {
+      color: #0b6f75;
+    }
+
+    .event-card h2 {
+      margin: 0 0 0.5rem;
+      font-size: 1.65rem;
+    }
+
+    .event-card h3 {
+      margin: 0 0 0.75rem;
+      color: var(--accent);
+      font-size: 1.15rem;
+    }
+
+    .event-card ul {
+      margin: 1rem 0;
+      padding-left: 1.2rem;
+    }
+
+    .event-thumb {
+      border-radius: 14px;
+      overflow: hidden;
+      border: 1px solid rgba(0, 0, 0, 0.08);
+      background: #ffffff;
+    }
+
+    .event-page-hero {
+      padding-top: 3rem;
+    }
+
+    .video-wrap {
+      position: relative;
+      width: 100%;
+      padding-top: 56.25%;
+      border-radius: 16px;
+      overflow: hidden;
+      box-shadow: 0 18px 40px rgba(0, 0, 0, 0.28);
+      background: rgba(0, 0, 0, 0.18);
+      margin-top: 1.5rem;
+    }
+
+    .video-wrap iframe {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      border: 0;
+    }
+
+    .flyer-card {
+      background: #fff7ec;
+      border-radius: 18px;
+      padding: 1rem;
+      box-shadow: 0 18px 40px rgba(0, 0, 0, 0.28);
+      border: 1px solid rgba(255, 127, 92, 0.25);
+    }
+
+    .flyer-card img {
+      border-radius: 12px;
+      margin: 0 auto;
+    }
+
+
+    .contact-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1.1fr) minmax(0, 1.4fr);
+      gap: 1.5rem;
+      margin-top: 2rem;
+    }
+
+    .contact-details p {
+      margin: 0.25rem 0;
+      font-size: 0.9rem;
+    }
+
+    .contact-details small {
+      display: block;
+      margin-top: 1.2rem;
+      color: var(--muted);
+      font-size: 0.82rem;
+    }
+
+    .contact-actions {
+      margin-top: 1.4rem;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.75rem;
+    }
+
+    form {
+      display: grid;
+      gap: 0.9rem;
+      font-size: 0.9rem;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 0.15rem;
+      font-weight: 500;
+    }
+
+    input,
+    textarea {
+      width: 100%;
+      padding: 0.55rem 0.7rem;
+      border-radius: 10px;
+      border: 1px solid rgba(0, 0, 0, 0.2);
+      background: rgba(0, 40, 45, 0.4);
+      color: #fff;
+      font: inherit;
+      outline: none;
+      transition: border-color 0.15s ease-out, box-shadow 0.15s ease-out, background 0.15s ease-out;
+    }
+
+    input::placeholder,
+    textarea::placeholder {
+      color: rgba(255, 255, 255, 0.6);
+    }
+
+    input:focus,
+    textarea:focus {
+      border-color: var(--accent);
+      box-shadow: 0 0 0 2px var(--ring);
+      background: rgba(0, 40, 45, 0.6);
+    }
+
+    textarea {
+      min-height: 120px;
+      resize: vertical;
+    }
+
+    .form-note {
+      margin-top: 0.5rem;
+      font-size: 0.8rem;
+      color: var(--muted);
+    }
+
+    footer {
+      border-top: 1px solid rgba(255, 255, 255, 0.14);
+      padding: 1.6rem 0 3rem;
+      font-size: 0.8rem;
+      color: var(--muted);
+      text-align: center;
+    }
+
+    @media (max-width: 900px) {
+      .hero-grid {
+        grid-template-columns: minmax(0, 1fr);
+      }
+
+      .hero-side {
+        max-width: 420px;
+        margin: 0 auto;
+        width: 100%;
+      }
+
+      .features-grid,
+      .programs-grid,
+      .panels-grid,
+      .faq-grid,
+  
+    .event-callout {
+      margin-top: 3rem;
+    }
+
+    .event-card {
+      display: grid;
+      grid-template-columns: minmax(0, 1.4fr) minmax(220px, 0.8fr);
+      gap: 1.5rem;
+      align-items: center;
+      background: #fff7ec;
+      color: #0b6f75;
+      border-radius: 18px;
+      padding: 1.8rem;
+      box-shadow: 0 18px 40px rgba(0, 0, 0, 0.28);
+      border: 1px solid rgba(255, 127, 92, 0.25);
+    }
+
+    .event-card h2,
+    .event-card h3,
+    .event-card p,
+    .event-card li {
+      color: #0b6f75;
+    }
+
+    .event-card h2 {
+      margin: 0 0 0.5rem;
+      font-size: 1.65rem;
+    }
+
+    .event-card h3 {
+      margin: 0 0 0.75rem;
+      color: var(--accent);
+      font-size: 1.15rem;
+    }
+
+    .event-card ul {
+      margin: 1rem 0;
+      padding-left: 1.2rem;
+    }
+
+    .event-thumb {
+      border-radius: 14px;
+      overflow: hidden;
+      border: 1px solid rgba(0, 0, 0, 0.08);
+      background: #ffffff;
+    }
+
+    .event-page-hero {
+      padding-top: 3rem;
+    }
+
+    .video-wrap {
+      position: relative;
+      width: 100%;
+      padding-top: 56.25%;
+      border-radius: 16px;
+      overflow: hidden;
+      box-shadow: 0 18px 40px rgba(0, 0, 0, 0.28);
+      background: rgba(0, 0, 0, 0.18);
+      margin-top: 1.5rem;
+    }
+
+    .video-wrap iframe {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      border: 0;
+    }
+
+    .flyer-card {
+      background: #fff7ec;
+      border-radius: 18px;
+      padding: 1rem;
+      box-shadow: 0 18px 40px rgba(0, 0, 0, 0.28);
+      border: 1px solid rgba(255, 127, 92, 0.25);
+    }
+
+    .flyer-card img {
+      border-radius: 12px;
+      margin: 0 auto;
+    }
+
+
+    .contact-grid {
+        grid-template-columns: minmax(0, 1fr);
+      }
+
+      header .inner {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.4rem;
+      }
+
+      header nav {
+        gap: 1rem;
+        flex-wrap: wrap;
+      }
+
+      .btn-row {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      .btn,
+      .btn.alt {
+        width: 100%;
+        justify-content: center;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="inner container">
+      <div class="brand">Student-Led Prayer, LLC</div>
+      <nav aria-label="Primary">
+        <a href="#overview">Overview</a>
+        <a href="#revival">July 18 Revival</a>
+        <a href="#programs">Programs</a>
+        <a href="#pilot">Pilot</a>
+        <a href="#faq">FAQ</a>
+        <a href="#contact">Contact</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <!-- Hero / Overview -->
+    <section id="overview" class="section hero">
+      <div class="container hero-grid">
+        <div>
+          <div class="pill">Quiet, school-friendly technology</div>
+          <h1>Tools that help students organize prayer, build character, and grow&mdash;guided by educators and aligned with school policies.</h1>
+          <p>
+            Student-Led Prayer, LLC develops simple, school-friendly technology like the PrayerQuest app and program
+            toolkits. Our focus is supporting student-initiated prayer, positive behavior, and service learning&mdash;without
+            disrupting instruction or adding heavy workloads for staff.
+          </p>
+          <div class="btn-row">
+            <a href="#contact" class="btn">Request a demo</a>
+            <a href="#pilot" class="btn alt">Join the pilot</a>
+            <a href="#contact" class="btn alt">Contact</a>
+          </div>
+        </div>
+
+        <aside class="hero-side" aria-label="Summary">
+          <img
+            src="student-led-prayer-logo.png"
+            alt="Lord Teach Us To Pray T-shirt design"
+            class="hero-logo"
+          >
+
+          <div class="card at-a-glance">
+            <h3>At a glance</h3>
+            <table class="glance-table">
+              <tr>
+                <th scope="row">Company</th>
+                <td>Student-Led Prayer, LLC</td>
+              </tr>
+              <tr>
+                <th scope="row">Focus</th>
+                <td>Education-safe technology such as the PrayerQuest app and program toolkits.</td>
+              </tr>
+              <tr>
+                <th scope="row">Use cases</th>
+                <td>Before- or after-school meetups, service learning, positive behavior supports, and mentoring.</td>
+              </tr>
+              <tr>
+                <th scope="row">Contact</th>
+                <td>Designed for schools, districts, and ministry partners interested in student-led prayer.</td>
+              </tr>
+              <tr>
+                <th scope="row">Availability</th>
+                <td>Pilot school partners and ministry affiliates, with options to scale as capacity grows.</td>
+              </tr>
+            </table>
+          </div>
+        </aside>
+      </div>
+
+
+      <div class="container event-callout" id="revival">
+        <div class="event-card">
+          <div>
+            <h2>Upcoming Event</h2>
+            <h3>First Annual Student-Led Prayer Community Revival</h3>
+            <p>
+              <strong>Saturday, July 18, 2026</strong><br>
+              White Station High School &bull; 3:00 PM – 6:00 PM
+            </p>
+            <ul>
+              <li>Free for students</li>
+              <li>Dinner will be provided</li>
+              <li>Student keynote speakers</li>
+              <li>Download the Student-Led Prayer app using school code <strong>REVIVAL2026</strong></li>
+            </ul>
+            <a href="community-revival.html" class="btn">View Revival Details</a>
+          </div>
+          <a class="event-thumb" href="community-revival.html" aria-label="View Student-Led Prayer Community Revival details">
+            <img src="revival-flyer.jpg" alt="Student-Led Prayer Community Revival flyer">
+          </a>
+        </div>
+      </div>
+
+      <div class="container">
+        <div class="features-grid">
+          <div class="card">
+            <h3>Student-led by design</h3>
+            <p>
+              Programs are built to support voluntary, student-initiated activities under adult oversight. Students
+              organize and lead while staff provide guidance consistent with local policy.
+            </p>
+          </div>
+          <div class="card">
+            <h3>Instruction-friendly</h3>
+            <p>
+              Lightweight tools that fit before or after school, advisory periods, or other approved windows&mdash;so
+              classroom instruction stays the main focus.
+            </p>
+          </div>
+          <div class="card">
+            <h3>Privacy-conscious</h3>
+            <p>
+              Minimal required data, clear consent options, and practical safeguards. Pilots can even run fully offline
+              using printed materials and sign-up cards if preferred.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Programs and Products -->
+    <section id="programs" class="section">
+      <div class="container">
+        <h2>Programs and Products</h2>
+        <p class="lead">
+          Student-Led Prayer combines mentoring, character development, and technology. The programs below can be used
+          individually or as a unified set of tools to support students’ spiritual and academic growth.
+        </p>
+
+        <div class="programs-grid">
+          <div class="card">
+            <h3>PrayerQuest App</h3>
+            <p>
+              A prayer and character-building app for students with school codes, parental consent options, and privacy-aware
+              settings. Includes reflection prompts, group features, and simple dashboards for mentors.
+            </p>
+          </div>
+
+          <div class="card">
+            <h3>WonderServe Adventures</h3>
+            <p>
+              Wonder is a name that inspires children to explore the joys of service, instilling a spirit of adventure
+              in their acts of kindness. Students engage in service activities and community-building events,
+              participating in the Tennessee Kids Serve Summer Challenge with First Lady Maria Lee
+              (https://www.tn.gov/firstlady/tennessee-serves.html).
+            </p>
+          </div>
+
+          <div class="card">
+            <h3>Faithful Progress Trackers</h3>
+            <p>
+              Integrated tracking tools help students monitor prayer habits, academic milestones, and positive classroom
+              behaviors. Simple dashboards and goal-setting prompts encourage growth over time.
+            </p>
+          </div>
+
+          <div class="card">
+            <h3>Faith Bridge Connect</h3>
+            <p>
+              A framework for connecting students across schools and regions through safe, moderated virtual prayer and
+              service opportunities. Schools can opt in to cross-campus events while keeping local controls in place.
+            </p>
+          </div>
+
+          <div class="card">
+            <h3>PrayerQuest Oasis</h3>
+            <p>
+              We will establish a space for students to use the PrayerQuest Gaming App for prayer, reflection, and
+              spiritual growth, promoting well-being and positive behavior. This Oasis space will serve as an alternative
+              to in-school suspension, providing a supportive environment for reflection and behavioral improvement.
+            </p>
+          </div>
+
+          <div class="card">
+            <h3>FaithTube</h3>
+            <p>
+              A student-centered video concept for testimonies, music, art, and creative expressions of faith.
+              Content guidelines and adult moderation help keep sharing respectful, encouraging, and school-appropriate.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Pilot and Partnership Options -->
+    <section id="pilot" class="section">
+      <div class="container">
+        <h2>Pilot and Partnership Options</h2>
+        <p class="lead">
+          Student-Led Prayer is beginning with focused pilots that can be adapted to local school culture and policies.
+          Each partnership includes planning support and practical tools to help you introduce programs with confidence.
+        </p>
+
+        <div class="panels-grid">
+          <div class="card">
+            <h3>School/District Pilot</h3>
+            <table class="info-table">
+              <tr>
+                <th scope="row">Includes</th>
+                <td>Onboarding toolkit, staff briefing deck, program templates, and optional app access.</td>
+              </tr>
+              <tr>
+                <th scope="row">Timeline</th>
+                <td>Typically 4–8 weeks, adjustable to your calendar and approval process.</td>
+              </tr>
+              <tr>
+                <th scope="row">Commitment</th>
+                <td>Designated staff liaison and student leadership team to champion the pilot.</td>
+              </tr>
+              <tr>
+                <th scope="row">Pricing</th>
+                <td>Custom quote based on scope, number of sites, and level of technology integration.</td>
+              </tr>
+            </table>
+          </div>
+
+          <div class="card">
+            <h3>Ministry/Community Partner</h3>
+            <table class="info-table">
+              <tr>
+                <th scope="row">Includes</th>
+                <td>Program kit for before/after-school, weekend, or summer settings.</td>
+              </tr>
+              <tr>
+                <th scope="row">Support</th>
+                <td>Implementation checklist, sample communication tools, and limited office hours.</td>
+              </tr>
+              <tr>
+                <th scope="row">Scaling</th>
+                <td>Bulk licenses and train-the-trainer options for larger networks.</td>
+              </tr>
+              <tr>
+                <th scope="row">Pricing</th>
+                <td>Tiered, with volume discounts available for multi-site partners.</td>
+              </tr>
+            </table>
+          </div>
+        </div>
+
+        <p class="note">
+          All offerings are designed to align with applicable school policies and laws. Local review and approvals are
+          required before implementation, and student participation is always voluntary.
+        </p>
+      </div>
+    </section>
+
+    <!-- FAQ -->
+    <section id="faq" class="section">
+      <div class="container">
+        <h2>Frequently Asked Questions</h2>
+        <div class="faq-grid">
+          <div class="card">
+            <h3>How is this “student-led”?</h3>
+            <p>
+              Activities are initiated and organized by students. Adults provide oversight, safety, and guidance
+              consistent with local policy and venue rules, but students are the ones inviting peers and shaping content.
+            </p>
+          </div>
+          <div class="card">
+            <h3>Does this replace instruction?</h3>
+            <p>
+              No. Programs are designed for before- or after-school use, approved club times, or other designated
+              windows. They are intentionally lightweight so they do not disrupt core academic instruction.
+            </p>
+          </div>
+          <div class="card">
+            <h3>What about privacy and data?</h3>
+            <p>
+              We design with minimal data collection in mind. Pilots can run with limited accounts or even fully offline
+              using printed materials, sign-up cards, and analog activities if that is a better fit for your setting.
+            </p>
+          </div>
+          <div class="card">
+            <h3>Is the app required?</h3>
+            <p>
+              No. Each program includes analog options. Schools and partners may adopt the app later or only for select
+              groups once they are comfortable with the technology and consent processes.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Contact -->
+    <section id="contact" class="section">
+      <div class="container">
+        <h2>Contact</h2>
+        <div class="contact-grid">
+          <div class="card contact-details">
+            <p><strong>Email:</strong> lihodges@memphis.edu</p>
+            <p><strong>Phone:</strong> 901-336-4116</p>
+            <small>
+              Prefer a quiet profile? We do not use social media trackers and this page has no analytics.
+            </small>
+
+            <div class="contact-actions">
+              <a href="mailto:lihodges@memphis.edu?subject=Pilot%20inquiry" class="btn">Pilot inquiry</a>
+              <a href="mailto:lihodges@memphis.edu?subject=General%20question" class="btn alt">General question</a>
+            </div>
+          </div>
+
+          <div class="card">
+            <h3>Newsletter (optional)</h3>
+            <form action="#" method="post">
+              <!-- This form can be wired to email or a form-handling service later. -->
+              <div>
+                <label for="name">Your name</label>
+                <input id="name" name="name" type="text" placeholder="Your name">
+              </div>
+              <div>
+                <label for="email">Your email</label>
+                <input id="email" name="email" type="email" placeholder="you@example.org">
+              </div>
+              <div>
+                <label for="org">School or organization (optional)</label>
+                <input id="org" name="organization" type="text" placeholder="School or organization (optional)">
+              </div>
+              <div>
+                <label for="message">Areas of interest or questions (optional)</label>
+                <textarea id="message" name="message" placeholder="Tell us a little about your interest or questions."></textarea>
+              </div>
+              <button type="submit" class="btn">Send</button>
+              <div class="form-note">
+                Submitting will open your email client or can be connected to a secure service in the future&mdash;no
+                third-party analytics are used on this site.
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container">
+      <div>© 2025 Student-Led Prayer, LLC. All rights reserved.</div>
+      <div>Single-page informational site. No cookies. No analytics.</div>
+    </div>
+  </footer>
+</body>
+</html>
