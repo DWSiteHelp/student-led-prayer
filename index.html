@@ -439,6 +439,164 @@
     }
 
 
+
+    /* Student Voices prayer feature */
+    .student-voice-section {
+      padding-top: 0;
+    }
+
+    .prayer-feature {
+      position: relative;
+      max-width: 860px;
+      margin: 0 auto;
+      padding: 2rem 2.2rem;
+      border-radius: 24px;
+      background: #fff7ec;
+      color: #0b6f75;
+      border: 1px solid rgba(255, 127, 92, 0.28);
+      box-shadow: 0 18px 40px rgba(0, 0, 0, 0.24);
+    }
+
+    .prayer-feature::after {
+      content: "";
+      position: absolute;
+      left: 64px;
+      bottom: -22px;
+      width: 0;
+      height: 0;
+      border: 22px solid transparent;
+      border-top-color: #fff7ec;
+      border-bottom: 0;
+      border-left: 0;
+    }
+
+    .prayer-feature .eyebrow {
+      margin: 0 0 0.55rem;
+      color: var(--accent);
+      font-size: 0.78rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .prayer-feature h2 {
+      margin: 0 0 0.75rem;
+      color: #0b6f75;
+      font-size: 1.75rem;
+    }
+
+    .prayer-feature p {
+      margin: 0 0 1rem;
+      color: #315f63;
+      line-height: 1.65;
+    }
+
+    .prayer-attribution {
+      font-weight: 650;
+      color: #0b6f75 !important;
+    }
+
+    .prayer-modal[hidden] {
+      display: none;
+    }
+
+    .prayer-modal {
+      position: fixed;
+      inset: 0;
+      z-index: 1000;
+      display: grid;
+      place-items: center;
+      padding: 1rem;
+    }
+
+    .prayer-modal-backdrop {
+      position: absolute;
+      inset: 0;
+      background: rgba(0, 28, 32, 0.78);
+      backdrop-filter: blur(4px);
+    }
+
+    .prayer-modal-panel {
+      position: relative;
+      z-index: 1;
+      width: min(960px, 96vw);
+      max-height: 92vh;
+      overflow: auto;
+      border-radius: 20px;
+      background: #fff7ec;
+      color: #0b6f75;
+      padding: 1.25rem;
+      box-shadow: 0 24px 70px rgba(0, 0, 0, 0.45);
+    }
+
+    .prayer-modal-header {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 1rem;
+      margin-bottom: 1rem;
+    }
+
+    .prayer-modal-header h2 {
+      margin: 0;
+      color: #0b6f75;
+      font-size: 1.45rem;
+    }
+
+    .prayer-modal-header p {
+      margin: 0.25rem 0 0;
+      color: #527276;
+      font-size: 0.9rem;
+    }
+
+    .modal-close {
+      flex: 0 0 auto;
+      width: 42px;
+      height: 42px;
+      border: 0;
+      border-radius: 999px;
+      background: var(--accent);
+      color: #fff;
+      font-size: 1.4rem;
+      line-height: 1;
+      cursor: pointer;
+    }
+
+    .prayer-pages {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 1rem;
+      align-items: start;
+    }
+
+    .prayer-page {
+      margin: 0;
+      padding: 0.65rem;
+      border-radius: 14px;
+      background: #ffffff;
+      border: 1px solid rgba(11, 111, 117, 0.14);
+    }
+
+    .prayer-page img {
+      width: 100%;
+      height: auto;
+      border-radius: 8px;
+    }
+
+    body.modal-open {
+      overflow: hidden;
+    }
+
+    @media (max-width: 700px) {
+      .prayer-feature {
+        padding: 1.5rem;
+      }
+
+      .prayer-pages {
+        grid-template-columns: 1fr;
+      }
+    }
+
     .contact-grid {
       display: grid;
       grid-template-columns: minmax(0, 1.1fr) minmax(0, 1.4fr);
@@ -742,6 +900,44 @@
         </div>
       </div>
 
+
+    <!-- Student Voices -->
+    <section id="student-voices" class="section student-voice-section" aria-labelledby="student-voices-title">
+      <div class="container">
+        <article class="prayer-feature">
+          <div class="eyebrow">Student Voices</div>
+          <h2 id="student-voices-title">Opening Prayer from the Community Revival</h2>
+          <p>
+            Ninth-grade student speaker Jarius Taylor shared this original opening prayer at the First Annual
+            Student-Led Prayer Community Revival. Select the button below to view his handwritten prayer.
+          </p>
+          <p class="prayer-attribution">Written and delivered by Jarius Taylor, ninth grade.</p>
+          <button class="btn" type="button" data-open-prayer>Read Jarius's Prayer</button>
+        </article>
+      </div>
+    </section>
+
+    <div class="prayer-modal" id="prayer-modal" role="dialog" aria-modal="true" aria-labelledby="prayer-modal-title" hidden>
+      <div class="prayer-modal-backdrop" data-close-prayer></div>
+      <div class="prayer-modal-panel" role="document">
+        <div class="prayer-modal-header">
+          <div>
+            <h2 id="prayer-modal-title">Jarius Taylor's Opening Prayer</h2>
+            <p>First Annual Student-Led Prayer Community Revival</p>
+          </div>
+          <button class="modal-close" type="button" aria-label="Close prayer" data-close-prayer>&times;</button>
+        </div>
+        <div class="prayer-pages">
+          <figure class="prayer-page">
+            <img src="jarius-opening-prayer-page-1.jpg" alt="First page of Jarius Taylor's handwritten opening prayer">
+          </figure>
+          <figure class="prayer-page">
+            <img src="jarius-opening-prayer-page-2.jpg" alt="Second page of Jarius Taylor's handwritten opening prayer">
+          </figure>
+        </div>
+      </div>
+    </div>
+
       <div class="container">
         <div class="features-grid">
           <div class="card">
@@ -988,5 +1184,38 @@
       <div>Single-page informational site. No cookies. No analytics.</div>
     </div>
   </footer>
+
+  <script>
+    (function () {
+      const modal = document.getElementById('prayer-modal');
+      const openButton = document.querySelector('[data-open-prayer]');
+      const closeButtons = modal ? modal.querySelectorAll('[data-close-prayer]') : [];
+      let lastFocusedElement = null;
+
+      function openPrayer() {
+        if (!modal) return;
+        lastFocusedElement = document.activeElement;
+        modal.hidden = false;
+        document.body.classList.add('modal-open');
+        const closeButton = modal.querySelector('.modal-close');
+        if (closeButton) closeButton.focus();
+      }
+
+      function closePrayer() {
+        if (!modal) return;
+        modal.hidden = true;
+        document.body.classList.remove('modal-open');
+        if (lastFocusedElement) lastFocusedElement.focus();
+      }
+
+      if (openButton) openButton.addEventListener('click', openPrayer);
+      closeButtons.forEach((button) => button.addEventListener('click', closePrayer));
+
+      document.addEventListener('keydown', function (event) {
+        if (event.key === 'Escape' && modal && !modal.hidden) closePrayer();
+      });
+    }());
+  </script>
+
 </body>
 </html>
