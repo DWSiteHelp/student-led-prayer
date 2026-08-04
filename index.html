@@ -400,6 +400,11 @@
       overflow: hidden;
       border: 1px solid rgba(0, 0, 0, 0.08);
       background: #ffffff;
+      display: block;
+      width: 100%;
+      padding: 0;
+      cursor: pointer;
+      font: inherit;
     }
 
     .event-page-hero {
@@ -583,6 +588,21 @@
       border-radius: 8px;
     }
 
+    .flyer-modal-img {
+      width: 100%;
+      height: auto;
+      border-radius: 8px;
+      display: block;
+      margin: 0 auto;
+    }
+
+    .modal-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.75rem;
+      margin-top: 1.25rem;
+    }
+
     body.modal-open {
       overflow: hidden;
     }
@@ -740,6 +760,11 @@
       overflow: hidden;
       border: 1px solid rgba(0, 0, 0, 0.08);
       background: #ffffff;
+      display: block;
+      width: 100%;
+      padding: 0;
+      cursor: pointer;
+      font: inherit;
     }
 
     .event-page-hero {
@@ -912,20 +937,20 @@
             Student-Led Prayer Community Revival. Select the button below to view his handwritten prayer.
           </p>
           <p class="prayer-attribution">Written and delivered by Jarius Taylor, ninth grade.</p>
-          <button class="btn" type="button" data-open-prayer>Read Jarius's Prayer</button>
+          <button class="btn" type="button" data-open-modal="prayer-modal">Read Jarius's Prayer</button>
         </article>
       </div>
     </section>
 
     <div class="prayer-modal" id="prayer-modal" role="dialog" aria-modal="true" aria-labelledby="prayer-modal-title" hidden>
-      <div class="prayer-modal-backdrop" data-close-prayer></div>
+      <div class="prayer-modal-backdrop" data-close-modal></div>
       <div class="prayer-modal-panel" role="document">
         <div class="prayer-modal-header">
           <div>
             <h2 id="prayer-modal-title">Jarius Taylor's Opening Prayer</h2>
             <p>First Annual Student-Led Prayer Community Revival</p>
           </div>
-          <button class="modal-close" type="button" aria-label="Close prayer" data-close-prayer>&times;</button>
+          <button class="modal-close" type="button" aria-label="Close prayer" data-close-modal>&times;</button>
         </div>
         <div class="prayer-pages">
           <figure class="prayer-page">
@@ -1028,6 +1053,53 @@
         </div>
       </div>
     </section>
+
+    <!-- App Download -->
+    <div class="container event-callout" id="download-app">
+      <div class="event-card">
+        <div>
+          <h2>Get the App</h2>
+          <h3>Download the Student-Led Prayer App</h3>
+          <p>
+            Part of our pilot project, the app helps students share Christian videos, send prayer requests, keep an
+            online journal, and pray anytime with guided scriptures and background music.
+          </p>
+          <ul>
+            <li>Share Christian videos with your prayer group</li>
+            <li>Send prayer requests and encourage each other in faith</li>
+            <li>Reflect, write, and track your spiritual journey in an online journal</li>
+            <li>Pray anytime with guided scriptures, music, and a focus timer</li>
+          </ul>
+          <button type="button" class="btn" data-open-modal="flyer-modal">See Flyer</button>
+        </div>
+        <button
+          type="button"
+          class="event-thumb"
+          data-open-modal="flyer-modal"
+          aria-label="View full-size Student-Led Prayer App download flyer with QR codes for Android and iPhone"
+        >
+          <img src="PrayerAppDownloadImage.png" alt="Student-Led Prayer App download flyer with QR codes for Android and iPhone">
+        </button>
+      </div>
+    </div>
+
+    <div class="prayer-modal" id="flyer-modal" role="dialog" aria-modal="true" aria-labelledby="flyer-modal-title" hidden>
+      <div class="prayer-modal-backdrop" data-close-modal></div>
+      <div class="prayer-modal-panel" role="document">
+        <div class="prayer-modal-header">
+          <div>
+            <h2 id="flyer-modal-title">Student-Led Prayer App Flyer</h2>
+            <p>Download links and QR codes for Android and iPhone.</p>
+          </div>
+          <button class="modal-close" type="button" aria-label="Close flyer" data-close-modal>&times;</button>
+        </div>
+        <img class="flyer-modal-img" src="PrayerAppDownloadImage.png" alt="Student-Led Prayer App download flyer with QR codes for Android and iPhone">
+        <div class="modal-actions">
+          <a class="btn" href="PrayerAppDownloadImage.png" download="Student-Led-Prayer-App-Flyer.png">Download</a>
+          <button class="btn alt" type="button" data-close-modal>Close</button>
+        </div>
+      </div>
+    </div>
 
     <!-- Pilot and Partnership Options -->
     <section id="pilot" class="section">
@@ -1187,12 +1259,9 @@
 
   <script>
     (function () {
-      const modal = document.getElementById('prayer-modal');
-      const openButton = document.querySelector('[data-open-prayer]');
-      const closeButtons = modal ? modal.querySelectorAll('[data-close-prayer]') : [];
       let lastFocusedElement = null;
 
-      function openPrayer() {
+      function openModal(modal) {
         if (!modal) return;
         lastFocusedElement = document.activeElement;
         modal.hidden = false;
@@ -1201,18 +1270,30 @@
         if (closeButton) closeButton.focus();
       }
 
-      function closePrayer() {
+      function closeModal(modal) {
         if (!modal) return;
         modal.hidden = true;
         document.body.classList.remove('modal-open');
         if (lastFocusedElement) lastFocusedElement.focus();
       }
 
-      if (openButton) openButton.addEventListener('click', openPrayer);
-      closeButtons.forEach((button) => button.addEventListener('click', closePrayer));
+      document.querySelectorAll('[data-open-modal]').forEach((button) => {
+        button.addEventListener('click', () => {
+          openModal(document.getElementById(button.getAttribute('data-open-modal')));
+        });
+      });
+
+      document.querySelectorAll('[data-close-modal]').forEach((button) => {
+        button.addEventListener('click', () => {
+          closeModal(button.closest('.prayer-modal'));
+        });
+      });
 
       document.addEventListener('keydown', function (event) {
-        if (event.key === 'Escape' && modal && !modal.hidden) closePrayer();
+        if (event.key !== 'Escape') return;
+        document.querySelectorAll('.prayer-modal').forEach((modal) => {
+          if (!modal.hidden) closeModal(modal);
+        });
       });
     }());
   </script>
