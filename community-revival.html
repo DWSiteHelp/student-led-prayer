@@ -438,6 +438,51 @@
       margin: 0 auto;
     }
 
+    .speaker-grid {
+      display: grid;
+      grid-template-columns: minmax(220px, 0.8fr) minmax(0, 1.4fr);
+      gap: 2rem;
+      align-items: center;
+      margin-top: 1.5rem;
+    }
+
+    .speaker-grid figure {
+      margin: 0;
+    }
+
+    .speaker-grid img {
+      width: 100%;
+      border-radius: 16px;
+      box-shadow: 0 18px 40px rgba(0, 0, 0, 0.28);
+      border: 1px solid rgba(255, 255, 255, 0.14);
+    }
+
+    .speaker-grid figcaption {
+      margin-top: 0.75rem;
+      font-size: 0.9rem;
+      color: var(--muted);
+    }
+
+    .short-wrap {
+      position: relative;
+      width: 100%;
+      max-width: 320px;
+      margin: 0 auto;
+      padding-top: 177.78%;
+      border-radius: 16px;
+      overflow: hidden;
+      box-shadow: 0 18px 40px rgba(0, 0, 0, 0.28);
+      background: rgba(0, 0, 0, 0.18);
+    }
+
+    .short-wrap iframe {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      border: 0;
+    }
+
 
     .contact-grid {
       display: grid;
@@ -647,6 +692,12 @@
         justify-content: center;
       }
     }
+
+    @media (max-width: 900px) {
+      .speaker-grid {
+        grid-template-columns: minmax(0, 1fr);
+      }
+    }
   </style>
 </head>
 <body>
@@ -726,6 +777,30 @@
             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
             allowfullscreen>
           </iframe>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="speaker-spotlight">
+      <div class="container">
+        <h2>Keynote Speaker Spotlight</h2>
+        <p class="lead">
+          Grayton Faust, Student-Led Prayer Liaison for 2026–2027 at White Station High School, addressed students,
+          parents, and community supporters at the Community Revival.
+        </p>
+        <div class="speaker-grid">
+          <div class="short-wrap">
+            <iframe
+              src="https://www.youtube.com/embed/6upiyLQlZJA"
+              title="Grayton Faust's keynote address at the Student-Led Prayer Community Revival"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+              allowfullscreen>
+            </iframe>
+          </div>
+          <figure>
+            <img src="grayton-faust-spotlight.jpeg" alt="Grayton Faust speaking at the podium during the Student-Led Prayer Community Revival">
+            <figcaption>Grayton Faust, Student-Led Prayer Liaison, 2026–2027 | White Station High School</figcaption>
+          </figure>
         </div>
       </div>
     </section>
