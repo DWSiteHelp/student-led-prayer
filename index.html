@@ -386,6 +386,12 @@
       border-radius: 12px;
       display: block;
       border: 1px solid rgba(0, 0, 0, 0.08);
+      cursor: zoom-in;
+      transition: transform 0.12s ease;
+    }
+
+    .photo-highlights img:hover {
+      transform: translateY(-2px);
     }
 
     .photo-highlights figcaption {
@@ -393,6 +399,38 @@
       font-size: 0.85rem;
       line-height: 1.4;
       color: #0b6f75;
+    }
+
+    .photo-highlights-grid figure.featured {
+      grid-column: span 2;
+    }
+
+    .video-feature {
+      margin: 0 0 3rem;
+    }
+
+    .video-feature figcaption {
+      margin-top: 0.9rem;
+      text-align: center;
+      font-weight: 600;
+      font-size: 1.05rem;
+      color: var(--text);
+    }
+
+    .resource-icon {
+      display: block;
+      width: 100%;
+      max-width: 200px;
+      margin: 0 auto;
+      border-radius: 16px;
+      background: #ffffff;
+      padding: 12px 14px;
+      box-shadow: 0 8px 18px rgba(0, 0, 0, 0.15);
+    }
+
+    .resource-icon img {
+      display: block;
+      width: 100%;
     }
 
 
@@ -411,6 +449,10 @@
       padding: 1.8rem;
       box-shadow: 0 18px 40px rgba(0, 0, 0, 0.28);
       border: 1px solid rgba(255, 127, 92, 0.25);
+    }
+
+    .event-card.icon-left {
+      grid-template-columns: minmax(160px, 0.5fr) minmax(0, 1.5fr);
     }
 
     .event-card h2,
@@ -606,6 +648,32 @@
       font-size: 1.4rem;
       line-height: 1;
       cursor: pointer;
+    }
+
+    .photo-lightbox-panel {
+      position: relative;
+      text-align: center;
+    }
+
+    .photo-lightbox-close {
+      position: absolute;
+      top: 0.5rem;
+      right: 0.5rem;
+      z-index: 2;
+    }
+
+    .photo-lightbox-img {
+      display: block;
+      width: 100%;
+      max-height: 78vh;
+      object-fit: contain;
+      border-radius: 12px;
+    }
+
+    .photo-lightbox-caption {
+      margin: 0.9rem 0 0;
+      color: #0b6f75;
+      font-size: 0.95rem;
     }
 
     .prayer-pages {
@@ -875,6 +943,16 @@
         justify-content: center;
       }
     }
+
+    @media (max-width: 900px) {
+      .event-card.icon-left {
+        grid-template-columns: minmax(0, 1fr);
+      }
+
+      .photo-highlights-grid figure.featured {
+        grid-column: span 1;
+      }
+    }
   </style>
 </head>
 <body>
@@ -946,11 +1024,45 @@
         </aside>
       </div>
 
+      <div class="container">
+        <figure class="video-feature">
+          <div class="video-wrap">
+            <iframe
+              src="https://www.youtube.com/embed/07OlsZy3WpE?rel=0"
+              title="Watch the Student-Led Prayer Story"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+              allowfullscreen>
+            </iframe>
+          </div>
+          <figcaption>Watch the Student-Led Prayer Story</figcaption>
+        </figure>
+      </div>
+
+      <div class="container event-callout" id="student-resources">
+        <div class="event-card icon-left">
+          <div class="resource-icon">
+            <img src="student-led-prayer-logo.png" alt="Lord Teach Us To Pray T-shirt design">
+          </div>
+          <div>
+            <h2>Student and Parent Resources</h2>
+            <h3>Know Your Rights</h3>
+            <p>
+              Provide students, parents, educators, and community partners with a downloadable summary of Tennessee
+              provisions related to voluntary religious expression in public schools.
+            </p>
+            <a href="tennessee-laws.pdf" class="btn" download="Student-Led-Prayer-Tennessee-Laws-Bookmark.pdf">Download the Tennessee Laws Bookmark</a>
+          </div>
+        </div>
+      </div>
 
       <div class="container event-callout" id="revival">
         <div class="photo-highlights">
           <h3>Photo Highlights</h3>
           <div class="photo-highlights-grid">
+            <figure class="featured">
+              <img src="student-group.jpeg" alt="Students and adult volunteers wearing Student-Led Prayer T-shirts at a school event">
+              <figcaption>Students and adult volunteers taking part in Student-Led Prayer.</figcaption>
+            </figure>
             <figure>
               <img src="past-event-school-photo.jpg" alt="Students participating in Student-Led Prayer at their school with Student-Led Prayer, Inc. co-founder Amber Hodges">
               <figcaption>Students participating in Student-Led Prayer at their school with Student-Led Prayer, Inc. co-founder Amber Hodges.</figcaption>
@@ -1170,6 +1282,15 @@
       </div>
     </div>
 
+    <div class="prayer-modal" id="photo-lightbox" role="dialog" aria-modal="true" aria-labelledby="photo-lightbox-title" hidden>
+      <div class="prayer-modal-backdrop" data-close-modal></div>
+      <div class="prayer-modal-panel photo-lightbox-panel" role="document">
+        <button class="modal-close photo-lightbox-close" type="button" aria-label="Close photo" data-close-modal>&times;</button>
+        <img class="photo-lightbox-img" src="" alt="">
+        <p class="photo-lightbox-caption" id="photo-lightbox-title"></p>
+      </div>
+    </div>
+
     <!-- Pilot and Partnership Options -->
     <section id="pilot" class="section">
       <div class="container">
@@ -1349,6 +1470,22 @@
       document.querySelectorAll('[data-open-modal]').forEach((button) => {
         button.addEventListener('click', () => {
           openModal(document.getElementById(button.getAttribute('data-open-modal')));
+        });
+      });
+
+      const photoLightbox = document.getElementById('photo-lightbox');
+      const photoLightboxImg = photoLightbox ? photoLightbox.querySelector('.photo-lightbox-img') : null;
+      const photoLightboxCaption = photoLightbox ? photoLightbox.querySelector('.photo-lightbox-caption') : null;
+
+      document.querySelectorAll('.photo-highlights img').forEach((img) => {
+        img.addEventListener('click', (event) => {
+          event.preventDefault();
+          event.stopPropagation();
+          const figcaption = img.closest('figure').querySelector('figcaption');
+          photoLightboxImg.src = img.src;
+          photoLightboxImg.alt = img.alt;
+          photoLightboxCaption.textContent = figcaption ? figcaption.textContent : '';
+          openModal(photoLightbox);
         });
       });
 
