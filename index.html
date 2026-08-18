@@ -6,6 +6,14 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="theme-color" content="#0fb4c0">
   <style>
+    @font-face {
+      font-family: "Patrick Hand";
+      font-style: normal;
+      font-weight: 400;
+      font-display: swap;
+      src: url("fonts/patrick-hand-v25-latin-regular.woff2") format("woff2");
+    }
+
     :root {
       --bg: #0fb4c0;            /* lighter teal / aqua */
       --card: #009999;          /* slightly darker teal cards */
@@ -726,6 +734,77 @@
       }
     }
 
+    /* Student Prayer Requests */
+    .prayer-requests-section .lead {
+      max-width: 52rem;
+    }
+
+    .prayer-requests-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 2.25rem 1.75rem;
+      margin-top: 2.5rem;
+    }
+
+    .prayer-note {
+      position: relative;
+      background: #fdf3a0;
+      color: #3a3320;
+      border-radius: 3px;
+      padding: 1.4rem 1.3rem 1.1rem;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.18), 0 10px 22px rgba(0, 0, 0, 0.22);
+      transform: rotate(var(--tilt, 0deg));
+      transition: transform 0.15s ease, box-shadow 0.15s ease;
+    }
+
+    .prayer-note:hover {
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2), 0 16px 30px rgba(0, 0, 0, 0.28);
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .prayer-note {
+        transition: none;
+      }
+    }
+
+    .prayer-note .prayer-note-label {
+      margin: 0 0 0.75rem;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      font-weight: 700;
+      font-size: 0.75rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: #6b5f18;
+    }
+
+    .prayer-note .prayer-note-text {
+      margin: 0 0 1.25rem;
+      font-family: "Patrick Hand", "Segoe UI", sans-serif;
+      font-size: 1.4rem;
+      line-height: 1.4;
+      color: #3a3320;
+    }
+
+    .prayer-note .prayer-note-signature {
+      margin: 0;
+      text-align: right;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      font-size: 0.8rem;
+      color: #6b5f18;
+    }
+
+    .prayer-note:nth-child(5n+1) { --tilt: -2.5deg; }
+    .prayer-note:nth-child(5n+2) { --tilt: 1.5deg; }
+    .prayer-note:nth-child(5n+3) { --tilt: -1deg; }
+    .prayer-note:nth-child(5n+4) { --tilt: 2.5deg; }
+    .prayer-note:nth-child(5n+5) { --tilt: -1.75deg; }
+
+    @media (max-width: 700px) {
+      .prayer-note {
+        --tilt: 0deg !important;
+      }
+    }
+
     .contact-grid {
       display: grid;
       grid-template-columns: minmax(0, 1.1fr) minmax(0, 1.4fr);
@@ -962,6 +1041,7 @@
       <nav aria-label="Primary">
         <a href="#overview">Overview</a>
         <a href="#revival">Revival Recap</a>
+        <a href="#prayer-requests">Prayer Requests</a>
         <a href="#programs">Programs</a>
         <a href="#pilot">Pilot</a>
         <a href="#faq">FAQ</a>
@@ -1143,6 +1223,70 @@
         </div>
       </div>
     </div>
+
+    <!-- Student Prayer Requests -->
+    <section id="prayer-requests" class="section prayer-requests-section" aria-labelledby="prayer-requests-title">
+      <div class="container">
+        <h2 id="prayer-requests-title">Student Prayer Requests</h2>
+        <p class="lead">
+          These prayer requests were submitted by students and have been lightly edited to protect student privacy
+          while preserving the intent of each request.
+        </p>
+
+        <div class="prayer-requests-grid">
+          <article class="prayer-note">
+            <p class="prayer-note-label">Prayer Request</p>
+            <p class="prayer-note-text">Please pray for my family and our relationships.</p>
+            <p class="prayer-note-signature">Anonymous Student</p>
+          </article>
+          <article class="prayer-note">
+            <p class="prayer-note-label">Prayer Request</p>
+            <p class="prayer-note-text">Please pray for the health and well-being of my family.</p>
+            <p class="prayer-note-signature">Anonymous Student</p>
+          </article>
+          <article class="prayer-note">
+            <p class="prayer-note-label">Prayer Request</p>
+            <p class="prayer-note-text">Please pray for me as I prepare for important milestones ahead.</p>
+            <p class="prayer-note-signature">Anonymous Student</p>
+          </article>
+          <article class="prayer-note">
+            <p class="prayer-note-label">Prayer Request</p>
+            <p class="prayer-note-text">Please pray for our schools and communities.</p>
+            <p class="prayer-note-signature">Anonymous Student</p>
+          </article>
+          <article class="prayer-note">
+            <p class="prayer-note-label">Prayer Request</p>
+            <p class="prayer-note-text">Please pray that God gives me strength through the things I am facing.</p>
+            <p class="prayer-note-signature">Anonymous Student</p>
+          </article>
+          <article class="prayer-note">
+            <p class="prayer-note-label">Prayer Request</p>
+            <p class="prayer-note-text">Please pray for me. I really need prayer right now.</p>
+            <p class="prayer-note-signature">Anonymous Student</p>
+          </article>
+          <article class="prayer-note">
+            <p class="prayer-note-label">Prayer Request</p>
+            <p class="prayer-note-text">Please pray for my friends and their relationships.</p>
+            <p class="prayer-note-signature">Anonymous Student</p>
+          </article>
+          <article class="prayer-note">
+            <p class="prayer-note-label">Prayer Request</p>
+            <p class="prayer-note-text">Please pray for stronger relationships within my family.</p>
+            <p class="prayer-note-signature">Anonymous Student</p>
+          </article>
+          <article class="prayer-note">
+            <p class="prayer-note-label">Prayer Request</p>
+            <p class="prayer-note-text">Please pray that God gives me guidance and direction.</p>
+            <p class="prayer-note-signature">Anonymous Student</p>
+          </article>
+          <article class="prayer-note">
+            <p class="prayer-note-label">Prayer Request</p>
+            <p class="prayer-note-text">Please pray for my friends who may be going through difficult times.</p>
+            <p class="prayer-note-signature">Anonymous Student</p>
+          </article>
+        </div>
+      </div>
+    </section>
 
       <div class="container">
         <div class="features-grid">
