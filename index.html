@@ -425,6 +425,71 @@
       color: var(--text);
     }
 
+    .news-updates {
+      margin-bottom: 3rem;
+      background: #fff7ec;
+      color: #0b6f75;
+      border-radius: 18px;
+      padding: 1.8rem;
+      box-shadow: 0 18px 40px rgba(0, 0, 0, 0.28);
+      border: 1px solid rgba(255, 127, 92, 0.25);
+    }
+
+    .news-updates h2 {
+      margin: 0 0 1.2rem;
+      font-size: 1.5rem;
+      color: #0b6f75;
+    }
+
+    .news-updates figure {
+      margin: 0;
+    }
+
+    .news-updates figcaption {
+      margin-top: 0.6rem;
+      font-size: 0.95rem;
+      line-height: 1.4;
+      color: #0b6f75;
+    }
+
+    .news-video {
+      max-width: 760px;
+      margin: 0 auto 1.8rem !important;
+    }
+
+    .news-video figcaption {
+      text-align: center;
+      font-weight: 600;
+    }
+
+    .news-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 340px));
+      justify-content: center;
+      gap: 1.8rem;
+      align-items: start;
+    }
+
+    .news-updates .news-grid img {
+      width: 100%;
+      height: auto;
+      display: block;
+      border-radius: 12px;
+      border: 1px solid rgba(0, 0, 0, 0.12);
+    }
+
+    .news-updates img.lightbox-img {
+      cursor: zoom-in;
+    }
+
+    .news-updates .letter-link {
+      display: block;
+    }
+
+    .news-updates .letter-link img {
+      background: #ffffff;
+    }
+
     .resource-icon {
       display: block;
       width: 100%;
@@ -1040,6 +1105,7 @@
       <div class="brand">Student-Led Prayer, LLC</div>
       <nav aria-label="Primary">
         <a href="#overview">Overview</a>
+        <a href="#news">News</a>
         <a href="#revival">Revival Recap</a>
         <a href="#prayer-requests">Prayer Requests</a>
         <a href="#programs">Programs</a>
@@ -1116,6 +1182,37 @@
           </div>
           <figcaption>Watch the Student-Led Prayer Story</figcaption>
         </figure>
+      </div>
+
+      <div class="container">
+        <section class="news-updates" id="news" aria-labelledby="news-title">
+          <h2 id="news-title">News &amp; Updates</h2>
+
+          <figure class="news-video">
+            <div class="video-wrap">
+              <iframe
+                src="https://www.youtube.com/embed/Wpr1XGggv3I?rel=0"
+                title="Student-Led Prayer Liaison Grayton Faust addresses MSCS Board"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                allowfullscreen>
+              </iframe>
+            </div>
+            <figcaption>Student-Led Prayer Liaison Grayton Faust addresses MSCS Board</figcaption>
+          </figure>
+
+          <div class="news-grid">
+            <figure>
+              <img class="lightbox-img" src="grayton-faust-michelle-mckissack.jpg" alt="Grayton Faust and Michelle McKissack, president of the Tennessee School Boards Association, each holding Student-Led Prayer laws bookmarks" loading="lazy">
+              <figcaption>Grayton Faust shares the Student-Led Prayer laws with the newly elected president of the Tennessee School Boards Association, Michelle McKissack.</figcaption>
+            </figure>
+            <figure>
+              <a class="letter-link" href="blackburn-letter-memphis-student-led-prayer.pdf" target="_blank" rel="noopener">
+                <img src="blackburn-letter-preview.png" alt="Letter from Senator Marsha Blackburn to Memphis students at the Student-Led Prayer Revival, dated August 28, 2026" loading="lazy">
+              </a>
+              <figcaption>Senator Marsha Blackburn Promises to Support Student-Led Prayer as Governor-elect. <a href="blackburn-letter-memphis-student-led-prayer.pdf" target="_blank" rel="noopener">Read the full letter (PDF)</a>.</figcaption>
+            </figure>
+          </div>
+        </section>
       </div>
 
       <div class="container event-callout" id="student-resources">
@@ -1621,7 +1718,7 @@
       const photoLightboxImg = photoLightbox ? photoLightbox.querySelector('.photo-lightbox-img') : null;
       const photoLightboxCaption = photoLightbox ? photoLightbox.querySelector('.photo-lightbox-caption') : null;
 
-      document.querySelectorAll('.photo-highlights img').forEach((img) => {
+      document.querySelectorAll('.photo-highlights img, .news-updates img.lightbox-img').forEach((img) => {
         img.addEventListener('click', (event) => {
           event.preventDefault();
           event.stopPropagation();
